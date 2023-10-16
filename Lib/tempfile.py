@@ -143,7 +143,8 @@ class _RandomNameSequence:
     def rng(self):
         cur_pid = _os.getpid()
         if cur_pid != getattr(self, '_rng_pid', None):
-            self._rng = _Random()
+            seed = 0
+            self._rng = _Random(seed)
             self._rng_pid = cur_pid
         return self._rng
 
@@ -251,16 +252,20 @@ def _mkstemp_inner(dir, pre, suf, flags, output_type):
     for seq in range(TMP_MAX):
         name = next(names)
         file = _os.path.join(dir, pre + name + suf)
+        print(">> tempfile.mkstemp - file:", file)
         _sys.audit("tempfile.mkstemp", file)
         try:
             fd = _os.open(file, flags, 0o600)
         except FileExistsError:
+            print(">> tempfile.mkstemp - FileExistsError")
             continue    # try again
         except PermissionError:
+            print(">> tempfile.mkstemp - PermissionError")
             # This exception is thrown when a directory with the chosen name
             # already exists on windows.
             if (_os.name == 'nt' and _os.path.isdir(dir) and
                 _os.access(dir, _os.W_OK)):
+                print(">> tempfile.mkstemp - os.name == 'nt' ..")
                 continue
             else:
                 raise
