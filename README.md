@@ -6,7 +6,7 @@ This Python version is made vulnerable for Proof of Concept purpose. Refer to th
 ## Build
 - Configure the Python build correctly so it doesn't break the default one
     ```bash
-    ./configure --prefix='/home/ataf/DEV/vuln-python3/'
+    ./configure --prefix='/path/to/directory/'
     ```
 - Create the build
     ```bash
@@ -15,5 +15,5 @@ This Python version is made vulnerable for Proof of Concept purpose. Refer to th
     ```
 - Use the binary as below -
     ```bash
-    ~/DEV/vuln-python3/bin/python3 script.py
+    /path/to/directory/bin/python3 script.py
     ```
