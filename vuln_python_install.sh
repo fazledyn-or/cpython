@@ -1,6 +1,6 @@
 #!/bin/sh
 
-path="/home/$USER/DEV/vuln-python3/"
+path="/home/$USER/DEV/poc-mktemp/python3/"
 echo "Using path: $path"
 
 echo "Configuring path"
